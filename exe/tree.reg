@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\Generate Directory Tree]
+@="Generate Directory Tree"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\Generate Directory Tree\command]
+@="\"C:\\Program Files\\tree\\tree.exe\" /F /A > \"%V\\dirtree.txt\" && notepad \"%V\\dirtree.txt\""
