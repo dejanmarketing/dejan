@@ -79,7 +79,7 @@ class LinkBERTInference:
             link_tokens.append(" ".join(current_phrase))
 
         return link_tokens
-
+    
 # Example usage
 if __name__ == "__main__":
     linkbert = LinkBERTInference()
