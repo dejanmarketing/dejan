@@ -27,7 +27,12 @@ def authority(domain):
 @click.argument('date_or_days')
 def roo(date_or_days):
     """Fetch ROO data for a specific date or for the last 'n' days."""
-    roo(date_or_days)
+    try:
+        # Call the correct roo function here
+        from dejan.apps.roo_app import run_roo_app
+        run_roo_app(date_or_days)
+    except Exception as e:
+        click.echo(f"Error: {e}")
 
 if __name__ == "__main__":
     cli()
