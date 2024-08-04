@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="dejan",
-    version="0.1.2",
+    version="0.2",
     description="A collection of utilities for various tasks, including SEO tools and data processing.",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author="DejanSEO",
     author_email="enquiries@dejanmarketing.com",
-    url="https://github.com/dejanmarketing/dejan",  # Your GitHub repository
+    url="https://github.com/dejanmarketing/dejan", 
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -19,5 +19,15 @@ setup(
     install_requires=[
         "requests",
         "pandas",
+        "streamlit",
+        "transformers",
+        "torch",
+        "click",  # Add click for CLI handling
     ],
+    entry_points={
+        'console_scripts': [
+            'dejan=dejan.cli:cli',
+        ],
+    },
+    include_package_data=True,
 )
