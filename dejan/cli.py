@@ -11,9 +11,14 @@ def cli():
     pass
 
 @cli.command()
-def linkbert():
+@click.option('--text', default=None, help='The text to analyze.')
+@click.option('--group', default="phrase", help='Grouping strategy (subtoken, token, phrase). Default is phrase.')
+def linkbert(text, group):
     """Run the LinkBERT CLI tool."""
-    run_linkbert()
+    if not text:
+        text = click.prompt("Enter text to analyze")
+    
+    run_linkbert(text, group)
 
 @cli.command()
 @click.argument('date_or_days', default="1")  # Default to "1" if not provided
