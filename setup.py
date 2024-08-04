@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="dejan",
-    version="0.2",
+    version="0.2.1",  # Updated version
     description="A collection of utilities for various tasks, including SEO tools and data processing.",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
