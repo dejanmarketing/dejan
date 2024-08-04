@@ -3,17 +3,17 @@ import pandas as pd
 
 # Mapping search engine codes to their descriptions and URLs
 SEARCH_ENGINES = {
-    1: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=2",  # Google.com (Desktop)
-    2: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=3",  # Google.com.au (Desktop)
-    3: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=4",  # Google.com (Mobile)
-    4: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=5"   # Google.com.au (Mobile)
+    2: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=2",  # Google.com (Desktop)
+    3: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=3",  # Google.com.au (Desktop)
+    4: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=4",  # Google.com (Mobile)
+    5: "https://algoroo.com/API_v2.php?key=W3ROMzRGLxSRHHtPL12PXOPDuJiNtaSy&user=algoroo@algoroo.com&se=5"   # Google.com.au (Mobile)
 }
 
 def get_roo(search_engine, as_dataframe=False):
     """
     Fetches the roo data for the specified search engine.
 
-    :param search_engine: The integer key representing the search engine (1, 2, 3, or 4).
+    :param search_engine: The integer key representing the search engine (2, 3, 4, or 5).
     :param as_dataframe: If True, converts the JSON data to a pandas DataFrame.
     :return: The JSON data or a pandas DataFrame, depending on as_dataframe.
     

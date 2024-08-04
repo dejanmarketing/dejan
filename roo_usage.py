@@ -1,34 +1,27 @@
-import streamlit as st
-from dejan import roo
+from dejan import get_roo
 
-# Streamlit app title
-st.title("Roo Data Demo")
-
-# Sidebar for search engine selection
-st.sidebar.header("Search Engine Selection")
-search_engine = st.sidebar.selectbox(
-    "Select a Search Engine:",
-    options={
-        1: "Google.com (Desktop)",
-        2: "Google.com.au (Desktop)",
-        3: "Google.com (Mobile)",
-        4: "Google.com.au (Mobile)"
+def main():
+    # Mapping of search engines to their corresponding identifiers
+    search_engines = {
+        2: "google.com/desktop",
+        3: "google.com.au/desktop",
+        4: "google.com/mobile",
+        5: "google.com.au/mobile"
     }
-)
+    
+    # Choose the search engine by setting the appropriate identifier
+    search_engine = 2  # Change this number to select a different search engine:
+                       # 2: google.com/desktop
+                       # 3: google.com.au/desktop
+                       # 4: google.com/mobile
+                       # 5: google.com.au/mobile
+    
+    # Fetch data as a pandas DataFrame
+    roo_data = get_roo(search_engine, as_dataframe=True)
+    
+    # Display the first few rows of the DataFrame
+    print(f"Data for search engine {search_engine} ({search_engines[search_engine]}):")
+    print(roo_data.head())
 
-# Fetch data as a pandas DataFrame
-st.header("Data as Pandas DataFrame")
-try:
-    data_df = roo.get_roo(search_engine, as_dataframe=True)
-    st.dataframe(data_df)  # Display the DataFrame
-except Exception as e:
-    st.error(f"An error occurred while fetching the DataFrame: {e}")
-
-# Fetch raw JSON data
-st.header("Raw JSON Data")
-try:
-    data_json = roo.get_roo(search_engine, as_dataframe=False)
-    st.json(data_json)  # Display the raw JSON data
-except Exception as e:
-    st.error(f"An error occurred while fetching the raw JSON data: {e}")
-
+if __name__ == "__main__":
+    main()
