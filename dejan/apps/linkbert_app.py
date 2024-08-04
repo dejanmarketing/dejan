@@ -1,10 +1,6 @@
-import click
 from dejan import linkbert
 
-@click.command()
-@click.option('--text', prompt='Enter text to analyze', help='The text you want to analyze for link predictions.')
-@click.option('--group', default='token', help='The grouping strategy to use: subtoken, token, or phrase.')
-def main(text, group):
+def run_linkbert(text, group):
     """CLI tool for LinkBERT Token Prediction"""
     # Initialize the LinkBERTInference model
     model = linkbert.LinkBERTInference()
@@ -16,6 +12,3 @@ def main(text, group):
     print(f"\nPredicted link tokens ({group}):")
     for link in links:
         print(link)
-
-if __name__ == "__main__":
-    main()
