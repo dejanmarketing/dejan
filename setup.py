@@ -19,10 +19,9 @@ setup(
     install_requires=[
         "requests",
         "pandas",
-        "streamlit",
         "transformers",
         "torch",
-        "click",  # Add click for CLI handling
+        "click",
     ],
     entry_points={
         'console_scripts': [
