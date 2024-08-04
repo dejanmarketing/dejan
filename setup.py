@@ -2,13 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="dejan",
-    version="0.2.2",  # Updated version
+    version="0.2.2",
     description="A collection of utilities for various tasks, including SEO tools and data processing.",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author="DejanSEO",
     author_email="enquiries@dejanmarketing.com",
-    url="https://github.com/dejanmarketing/dejan", 
+    url="https://github.com/dejanmarketing/dejan",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
