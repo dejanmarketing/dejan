@@ -1,5 +1,6 @@
 import click
 import subprocess
+import os
 
 @click.group()
 def cli():
@@ -9,7 +10,8 @@ def cli():
 @cli.command()
 def linkbert():
     """Run the LinkBERT Streamlit app."""
-    subprocess.run(["streamlit", "run", "dejan/apps/linkbert_app.py"])
+    app_path = os.path.join(os.path.dirname(__file__), 'apps', 'linkbert_app.py')
+    subprocess.run(["streamlit", "run", app_path])
 
 if __name__ == "__main__":
     cli()
