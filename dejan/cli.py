@@ -1,6 +1,8 @@
+# cli.py
+
 import click
 from dejan.apps.linkbert_app import run_linkbert
-from dejan.apps.roo_app import roo  # New import
+from dejan.apps.roo_app import run_roo_app
 from dejan.authority import get_authority
 
 @click.group()
@@ -14,6 +16,21 @@ def linkbert():
     run_linkbert()
 
 @cli.command()
+@click.argument('date_or_days', default="1")  # Default to "1" if not provided
+@click.argument('region', default="us")  # Default to "us" if not provided
+@click.argument('device', default="mobile")  # Default to "mobile" if not provided
+def roo(date_or_days, region, device):
+    """
+    Fetch ROO data for a specific date or for the last 'n' days.
+    
+    Arguments:
+    - date_or_days: The date (YYYY-MM-DD) or the number of days to look back.
+    - region: The region (us or au).
+    - device: The device type (desktop or mobile).
+    """
+    run_roo_app(date_or_days, region, device)
+
+@cli.command()
 @click.argument('domain')
 def authority(domain):
     """Fetch the authority metric for a given domain."""
@@ -22,17 +39,6 @@ def authority(domain):
         click.echo(f"Domain Authority for {domain}: {authority_value:.2f}")
     except ValueError as e:
         click.echo(e)
-
-@cli.command()
-@click.argument('date_or_days')
-def roo(date_or_days):
-    """Fetch ROO data for a specific date or for the last 'n' days."""
-    try:
-        # Call the correct roo function here
-        from dejan.apps.roo_app import run_roo_app
-        run_roo_app(date_or_days)
-    except Exception as e:
-        click.echo(f"Error: {e}")
 
 if __name__ == "__main__":
     cli()
