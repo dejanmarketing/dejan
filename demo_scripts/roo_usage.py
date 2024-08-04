@@ -1,4 +1,4 @@
-from dejan import get_roo
+from dejan import roo
 
 def main():
     # Mapping of search engines to their corresponding identifiers
@@ -17,7 +17,7 @@ def main():
                        # 5: google.com.au/mobile
     
     # Fetch data as a pandas DataFrame
-    roo_data = get_roo(search_engine, as_dataframe=True)
+    roo_data = roo.get_roo(search_engine, as_dataframe=True)
     
     # Display the first few rows of the DataFrame
     print(f"Data for search engine {search_engine} ({search_engines[search_engine]}):")

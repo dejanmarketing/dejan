@@ -12,22 +12,7 @@ pip install dejan
 
 ### Current Utilities
 
-#### 1. dirtree
-
-**Purpose:** Generates an ASCII representation of the directory tree structure from any given root directory, including all subdirectories and files.
-
-**Usage:** This tool can be particularly useful for visualizing file structures in complex projects, making it easier to manage and navigate large SEO datasets.
-
-**Example Usage:**
-
-```python
-from dejan import generate_ascii_tree
-
-# Generate and print the directory tree for the current directory
-generate_ascii_tree()
-```
-
-#### 2. roo
+#### roo
 
 **Purpose:** Fetches and processes data from the Algoroo API, providing insights into search engine fluctuations.
 
@@ -43,18 +28,37 @@ generate_ascii_tree()
 **Example Usage:**
 
 ```python
-from dejan import get_roo
+from dejan import roo
 
-# Fetch data for Google.com (Desktop) and return it as a pandas DataFrame
-data_df = get_roo(2, as_dataframe=True)
-print(data_df.head())
+def main():
+    # Mapping of search engines to their corresponding identifiers
+    search_engines = {
+        2: "google.com/desktop",
+        3: "google.com.au/desktop",
+        4: "google.com/mobile",
+        5: "google.com.au/mobile"
+    }
+    
+    # Choose the search engine by setting the appropriate identifier
+    search_engine = 2  # Change this number to select a different search engine:
+                       # 2: google.com/desktop
+                       # 3: google.com.au/desktop
+                       # 4: google.com/mobile
+                       # 5: google.com.au/mobile
+    
+    # Fetch data as a pandas DataFrame
+    roo_data = roo.get_roo(search_engine, as_dataframe=True)
+    
+    # Display the first few rows of the DataFrame
+    print(f"Data for search engine {search_engine} ({search_engines[search_engine]}):")
+    print(roo_data.head())
 
-# Fetch raw JSON data for Google.com.au (Mobile)
-data_json = get_roo(5, as_dataframe=False)
-print(data_json)
+if __name__ == "__main__":
+    main()
+
 ```
 
-#### 3. linkbert
+#### linkbert
 
 **Purpose:** Uses the LinkBERT model to predict link tokens in the provided text, useful for analyzing link placement within content.
 
@@ -67,38 +71,47 @@ print(data_json)
 **Example Usage:**
 
 ```python
-from dejan import LinkBERTInference
+from dejan import linkbert
 
-# Initialize the LinkBERTInference model
-linkbert = LinkBERTInference()
+def main():
+    # Initialize the LinkBERTInference model
+    model = linkbert.LinkBERTInference()
 
-text = "LinkBERT is a model developed by Dejan Marketing designed to predict natural link placement within web content."
+    # Sample text for prediction
+    text = "LinkBERT is a model developed by Dejan Marketing designed to predict natural link placement within web content."
 
-# Group by subtoken
-links_subtoken = linkbert.predict_link_tokens(text, group="subtoken")
-print(f"Predicted link tokens (subtoken): {links_subtoken}")
+    print("Input Text:")
+    print(text)
+    print("-" * 50)
 
-# Group by token
-links_token = linkbert.predict_link_tokens(text, group="token")
-print(f"Predicted link tokens (token): {links_token}")
+    # Group by subtoken
+    links_subtoken = model.predict_link_tokens(text, group="subtoken")
+    print(f"Predicted link tokens (subtoken): {links_subtoken}")
 
-# Group by phrase
-links_phrase = linkbert.predict_link_tokens(text, group="phrase")
-print(f"Predicted link tokens (phrase): {links_phrase}")
+    # Group by token
+    links_token = model.predict_link_tokens(text, group="token")
+    print(f"Predicted link tokens (token): {links_token}")
+
+    # Group by phrase
+    links_phrase = model.predict_link_tokens(text, group="phrase")
+    print(f"Predicted link tokens (phrase): {links_phrase}")
+
+if __name__ == "__main__":
+    main()
 ```
 
-### Planned Features
+#### dirtree
 
-* **Keyword Clustering:** Automated clustering of keywords based on semantic similarity using machine learning algorithms.
-* **Content Optimization:** Tools to analyze and optimize content for SEO, including keyword density checks, readability scoring, and more.
-* **Link Analysis:** Utilities to analyze internal and external links, helping to optimize site architecture and link distribution.
+**Purpose:** Generates an ASCII representation of the directory tree structure from any given root directory, including all subdirectories and files.
 
-Stay tuned as more utilities are added to this package, transforming it into a powerful toolkit for any SEO professional working with machine learning.
+**Usage:** This tool can be particularly useful for visualizing file structures in complex projects, making it easier to manage and navigate large SEO datasets.
 
-### Contributing
+**Example Usage:**
 
-Contributions are welcome! If you have any ideas for features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
+```python
+from dejan import generate_ascii_tree
 
-### License
+# Generate and print the directory tree for the current directory
+generate_ascii_tree()
+```
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
