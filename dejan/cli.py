@@ -3,10 +3,27 @@ from dejan.apps.linkbert_app import run_linkbert
 from dejan.apps.roo_app import run_roo_app
 from dejan.authority import get_authority
 
-@click.group()
-def cli():
+@click.group(invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
     """Dejan CLI for various tools."""
-    pass
+    if ctx.invoked_subcommand is None:
+        click.echo(ctx.get_help())
+        # Manually display subcommand help
+        click.echo("\nLinkBERT Command:")
+        click.echo("-----------------")
+        with click.Context(linkbert) as ctx_linkbert:
+            click.echo(linkbert.get_help(ctx_linkbert))
+        
+        click.echo("\nROO Command:")
+        click.echo("------------")
+        with click.Context(roo) as ctx_roo:
+            click.echo(roo.get_help(ctx_roo))
+        
+        click.echo("\nAuthority Command:")
+        click.echo("------------------")
+        with click.Context(authority) as ctx_authority:
+            click.echo(authority.get_help(ctx_authority))
 
 @cli.command()
 @click.option('--text', default=None, help='The text to analyze.')
@@ -15,7 +32,6 @@ def linkbert(text, group):
     """Run the LinkBERT CLI tool."""
     if not text:
         text = click.prompt("Enter text to analyze")
-    
     run_linkbert(text, group)
 
 @cli.command()
@@ -40,7 +56,6 @@ def authority(domain):
     """Fetch the authority metric for a given domain."""
     if not domain:
         domain = click.prompt("Enter the domain to analyze")
-    
     try:
         authority_value = get_authority(domain)
         click.echo(f"Domain Authority for {domain}: {authority_value:.2f}")
