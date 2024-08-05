@@ -36,9 +36,12 @@ def roo(date_or_days, region, device):
     run_roo_app(date_or_days, region, device)
 
 @cli.command()
-@click.argument('domain')
+@click.option('--domain', default=None, help='The domain to analyze.')
 def authority(domain):
     """Fetch the authority metric for a given domain."""
+    if not domain:
+        domain = click.prompt("Enter the domain to analyze")
+    
     try:
         authority_value = get_authority(domain)
         click.echo(f"Domain Authority for {domain}: {authority_value:.2f}")
