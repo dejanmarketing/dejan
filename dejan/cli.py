@@ -1,5 +1,3 @@
-# cli.py
-
 import click
 from dejan.apps.linkbert_app import run_linkbert
 from dejan.apps.roo_app import run_roo_app
@@ -36,7 +34,8 @@ def roo(date_or_days, region, device):
     run_roo_app(date_or_days, region, device)
 
 @cli.command()
-@click.option('--domain', default=None, help='The domain to analyze.')
+@click.argument('domain', required=False)  # Positional argument, optional
+@click.option('--domain', '-d', help='The domain to analyze.')
 def authority(domain):
     """Fetch the authority metric for a given domain."""
     if not domain:
